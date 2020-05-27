@@ -1,0 +1,65 @@
+<%- include("../partials/header") %>
+
+<h1>new</h1>
+
+<form action="/admin/new" method="post">
+    <div class="container">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Name">Name</span>
+            </div>
+            <input type="text" name="airline[name]" class="form-control" aria-label="Name" aria-describedby="Name">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="date">Date</span>
+            </div>
+            <input type="text" name="airline[date]" class="form-control" aria-label="date" aria-describedby="date">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="leaveCity">Leave City</span>
+            </div>
+            <input type="text" name="airline[leaveCity]" class="form-control" aria-label="leaveCity" aria-describedby="leaveCity">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="arriveCity">Arrive City</span>
+            </div>
+            <input type="text" name="airline[arriveCity]" class="form-control" aria-label="arriveCity" aria-describedby="arriveCity">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="leaveAirport">Leave Airport</span>
+            </div>
+            <input type="text" name="airline[leaveAirport]" class="form-control" aria-label="leaveAirport" aria-describedby="leaveAirport">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="arriveAirport">Arrive Airport</span>
+            </div>
+            <input type="text" name="airline[arriveAirport]" class="form-control" aria-label="arriveAirport" aria-describedby="arriveAirport">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="leaveTime">Leave Time</span>
+            </div>
+            <input type="text" name="airline[leaveTime]" class="form-control" aria-label="leaveTime" aria-describedby="leaveTime">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="arriveTime">Arrive Time</span>
+            </div>
+            <input type="text" name="airline[arriveTime]" class="form-control" aria-label="arriveTime" aria-describedby="arriveTime">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Capacity">Capacity</span>
+            </div>
+            <input type="text" name="airline[capacity]" class="form-control" aria-label="Capacity" aria-describedby="Capacity">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Price">Price</span>
+            </div>
+            <input type="text" name="airline[price]" class="form-control" aria-label="Price" aria-describedby="Price">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="BookSum">BookSum</span>
+            </div>
+            <input type="text" name="airline[bookSum]" class="form-control" aria-label="BookSum" aria-describedby="BookSum">
+        </div>
+        <input type="submit" class="btn btn-lg btn-primary">
+    </div>
+</form>
+
+<%- include("../partials/footer") %>

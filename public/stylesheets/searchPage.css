@@ -1,0 +1,16 @@
+body {
+    background-image: url(../image/search.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.booking-form-box{
+    max-width: 350px;
+    border: 1px solid #ced4da;
+    margin: 10% auto 0;
+}

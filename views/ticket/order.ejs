@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Booking</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body style="background-image: url(/image/order.jpg);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Airline</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <% if(!currentUser){  %>
+                    <li><a class="nav-link" href="/login">登录 <i class="fas fa-user"></i></a></li>
+                    <li><a class="nav-link" href="/register">注册 <i class="fas fa-user-plus"></i></a></li>
+                    <% } else { %>
+                    <li><a class="nav-link" href="/user/<%=currentUser._id%>"><%= currentUser.username %> </a></li>
+                    <li><a class="nav-link" href="/logout">注销</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="width: 750px; opacity: 85%; font-weight:bold; transform: translate(100px, 90px);" class="bg-dark text-white">
+        <div style="font-size: 1.2rem; padding-top: 40px;padding-bottom: 40px;" class="jumbotron bg-secondary">
+            <div style="text-align: center; font-size: 1.3rem;">
+                <span style="padding-right: 20px;"><%= Airline.date.substring(0,5)%></span><%= Airline.leaveCity  %> <span style="padding-left: 10px;padding-right: 10px;"><i class="fas fa-long-arrow-alt-right"></i></span><%= Airline.arriveCity  %>
+            </div>
+            <div style="text-align: center;" class="row">
+                <div class="col">
+                    <span style="font-size: 1.5rem;"><%= Airline.leaveTime %></span><br/>
+                    <%= Airline.leaveAirport %>
+                </div>
+                <div class="col-6">
+                    <i style="padding-top: 25px;" class="fas fa-plane"></i>
+                </div>
+                <div class="col">
+                    <span style="font-size: 1.5rem;"><%= Airline.arriveTime %></span><br />
+                    <%= Airline.arriveAirport %>
+                </div>
+            </div>
+        </div>   
+        
+        <div style="height: 300px;" class="container">
+            <form action="/tickets/info" method="POST">
+                <h4 style="text-align: center;">请填写乘机人信息</h1>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputEmail1">姓名</label>
+                            <input type="name" name="order[name]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1">手机号</label>
+                            <input type="text" name="order[phoneNumber]" class="form-control" id="exampleInputPassword1" maxlength="11">
+                        </div>
+                    </div>
+                    <div  class="row">
+                        <div style="margin-top: 10px;" class="col">
+                            <label for="id">身份证号</label>
+                            <input type="text" name="order[idNumber]" class="form-control" id="id" maxlength="18">
+                            <small id="idHelp"" class="form-text text-muted">我们永远不会泄露您的个人信息</small>
+                        </div>
+                    </div>
+                    <input type="hidden" value="<%=Airline._id%>" name="Airline">
+                <button style="margin-top:20px" type="submit" class="btn btn-primary btn-block">提交</button>
+            </form>
+        </div>
+    </div>
+
+
+
+<%- include("../partials/footer") %>

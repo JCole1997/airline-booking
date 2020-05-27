@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Booking</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body style="background-image: none;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Airline</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <% if(!currentUser){  %>
+                    <li><a class="nav-link" href="/login">登录 <i class="fas fa-user"></i></a></li>
+                    <li><a class="nav-link" href="/register">注册 <i class="fas fa-user-plus"></i></a></li>
+                    <% } else { %>
+                    <li><a class="nav-link" href="/user/<%=currentUser._id%>"><%=currentUser.username %> </a></li>
+                    <li><a class="nav-link" href="/logout">注销</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">购票订单</h1>
+    </div>
+</div>
+
+<div class="container">
+        <div style="font-size: 1.2rem; padding-top: 40px;padding-bottom: 40px;" class="jumbotron bg-warning">
+            <div style="text-align: center; font-size: 1.3rem;">
+                <span style="padding-right: 20px;"><%= Airline.date.substring(0,5)%></span><%= Airline.leaveCity  %> <span
+                    style="padding-left: 10px;padding-right: 10px;"><i
+                        class="fas fa-long-arrow-alt-right"></i></span><%= Airline.arriveCity  %>
+            </div>
+            <div style="text-align: center;" class="row">
+                <div class="col">
+                    <span style="font-size: 1.5rem;"><%= Airline.leaveTime %></span><br />
+                    <%= Airline.leaveAirport %>
+                </div>
+                <div class="col-6">
+                    <i style="padding-top: 25px;" class="fas fa-plane"></i>
+                </div>
+                <div class="col">
+                    <span style="font-size: 1.5rem;"><%= Airline.arriveTime %></span><br />
+                    <%= Airline.arriveAirport %>
+                </div>
+            </div>
+        </div>
+        <div style="font-size: 1.2rem; padding-top: 40px;padding-bottom: 40px;" class="jumbotron bg-info">
+            <div class="row">
+                <div class="col">
+                    姓名：<%=Order.name%>
+                </div>
+                <div class="col">
+                    手机号：<%=Order.phoneNumber.substring(0,3)%>****<%=Order.phoneNumber.substring(7,11)%>
+                </div>
+                <div class="col">
+                    身份证号：<%=Order.idNumber.substring(0,3)%>***************
+                </div>
+            </div>
+            <div style="margin-top: 20px;" class="row">
+                <div style="font-size: 30px; margin-left: 700px" class="col">
+                    价格:¥  <%= Airline.price %>
+                </div>
+                <div style="margin-right: 100px;">
+                    <a href="/user/<%=currentUser._id%>" class="btn btn-danger btn-lg">支付</a>
+                </div>
+            </div>
+        </div>
+</div>
+
+<%- include("../partials/footer") %>

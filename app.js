@@ -8,14 +8,17 @@ methodOverride = require("method-override"),
 Campground = require("./models/campground"),
 Comment = require("./models/comment"),
 User = require("./models/user"),
+Airline = require("./models/airline"),
 seedDB = require("./seeds");
 
 var campgroundRoute = require("./routes/campgrounds");
 var commentRoute = require("./routes/comments");
 var indexRoute = require("./routes/index");
+var ticketRoute = require("./routes/tickets");
+var adminRoute = require("./routes/admin")
 
-// seedDB();
-mongoose.connect("mongodb://localhost:27017/yelp_camp_v6", {
+// CONFIG
+mongoose.connect("mongodb://localhost:27017/airline", {
     useNewUrlParser: true,   
     useUnifiedTopology: true
 });
@@ -35,13 +38,18 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// seedDB();
+
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();
 })
 
+//ROUTE
 app.use("/", indexRoute);
 app.use("/campgrounds", campgroundRoute);
 app.use("/campgrounds/:id/comments", commentRoute);
+app.use("/tickets", ticketRoute);
+app.use("/admin", adminRoute);
 
 app.listen(3000);

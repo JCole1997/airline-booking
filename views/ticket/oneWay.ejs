@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Booking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap-theme.css">
+  <link rel="stylesheet" href="/stylesheets/hero-slider.css">
+  <link rel="stylesheet" href="/stylesheets/owl-carousel.css">
+  <link rel="stylesheet" href="/stylesheets/searchPage.css">
+  <link rel="stylesheet" href="/stylesheets/tooplate-style.css">
+  <link rel="stylesheet" href="/stylesheets/datepicker.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">Airline</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <% if(!currentUser){  %>
+          <li><a class="nav-link" href="/login">登录 <i class="fas fa-user"></i></a></li>
+          <li><a class="nav-link" href="/register">注册 <i class="fas fa-user-plus"></i></a></li>
+          <% } else { %>
+          <li><a class="nav-link" href="/user/<%=currentUser._id%>"><%= currentUser.username %> </a></li>
+          <li><a class="nav-link" href="/logout">注销</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<% for(var i = 0; i < Airlines.length; i++){ %>
+  <% for(var j = 0; j < Airlines.length- i - 1; j ++){ %> 
+    <% if(Airlines[j].price > Airlines[j+1].price){ %>
+      <% var temp = Airlines[j+1]; %>
+      <% Airlines[j+1] = Airlines[j]; %>
+      <% Airlines[j] = temp; %>
+    <% } %> 
+  <% } %> 
+<% } %>
+<section class="banner" id="top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-md-offset-1">
+        <section id="first-tab-group" class="tabgroup">
+          <div id="tab1">
+            <div style="transform:translate(-150px,-100px)" class="submit-form">
+                <form id="form-submit" action="/tickets/show" method="get">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <fieldset>
+                        <label for="from">出发城市:</label>
+                        <select required name='from' onchange='this.form.()'>
+                          <option value="">选择城市...</option>
+                          <option value="北京">北京</option>
+                          <option value="上海">上海</option>
+                          <option value="广州">广州</option>
+                          <option value="深圳">深圳</option>
+                          <option value="成都">成都</option>
+                          <option value="杭州">杭州</option>
+                          <option value="武汉">武汉</option>
+                          <option value="西安">西安</option>
+                          <option value="重庆">重庆</option>
+                          <option value="青岛">青岛</option>
+                        </select>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset>
+                        <label for="to">到达城市:</label>
+                        <select required name='to' onchange='this.form.()'>
+                          <option value="">选择城市...</option>
+                          <option value="北京">北京</option>
+                          <option value="上海">上海</option>
+                          <option value="广州">广州</option>
+                          <option value="深圳">深圳</option>
+                          <option value="成都">成都</option>
+                          <option value="杭州">杭州</option>
+                          <option value="武汉">武汉</option>
+                          <option value="西安">西安</option>
+                          <option value="重庆">重庆</option>
+                          <option value="青岛">青岛</option>
+                        </select>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset>
+                        <label for="departure">出发日期:</label>
+                        <input name="deparure" type="text" class="form-control date" id="deparure" placeholder="选择日期..." required=""
+                          onchange='this.form.()'>
+                      </fieldset>
+                    </div>
+                    <div hidden class="col-md-6">
+                      <div class="radio-select">
+                        <div class="row">
+                          <div class="col-md-6 col-sm-6 col-xs-6">
+                            <label for="oneway">单程</label>
+                            <input type="radio" name="trip" checked id="oneway" value="one-way" required="required" onchange='this.form.()'>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset>
+                        <button style="margin-top:45px" type="submit" id="form-submit" class="btn">搜索</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div style="width: 950px; position:absolute;transform:translate(360px,55px)" class="tickets">
+          <div style="font-size: 1.1rem; height: 40px;" class="row bg-dark text-white align-items-center">
+            <div class="col-sm-3">
+              航班信息
+            </div>
+            <div class="col-sm">
+              起降时间
+            </div>
+            <div class="col-sm-4">
+              起抵机场
+            </div>
+            <div class="col-sm">
+              价格
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <% Airlines.forEach(airline => { %>
+          <div style="font-size: 1.1rem; height: 80px;" class="row bg-light align-items-center">
+            <div class="col-sm-3">
+              <%= airline.name %>
+            </div>
+            <div class="col-sm" style="font-size: 1.2rem;">
+              <%= airline.leaveTime %><br />
+              <span class="text-secondary"><%= airline.arriveTime %></span>
+            </div>
+            <div class="col-sm-4">
+              <%= airline.leaveAirport %><br/>
+              <%= airline.arriveAirport %>
+            </div>
+            <div class="col-sm text-danger" style="font-size: 1.3rem;">
+              ¥ <%= airline.price %>
+            </div>
+            <div class="col-sm-2">
+              <form action="/tickets/info" method="GET">
+              <button type="submit" class="btn btn-outline-warning" name="order" value="<%=airline._id%>"> 订 票 </button>
+              </form>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<script src="/js/vendor/jquery-1.11.2.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+<script src="/js/vendor/bootstrap.min.js"></script>
+
+<script src="/js/datepicker.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/vendor/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+
+
+
+    // navigation click actions 
+    $('.scroll-link').on('click', function (event) {
+      event.preventDefault();
+      var sectionID = $(this).attr("data-id");
+      scrollToID('#' + sectionID, 750);
+    });
+    // scroll to top action
+    $('.scroll-top').on('click', function (event) {
+      event.preventDefault();
+      $('html, body').animate({ scrollTop: 0 }, 'slow');
+    });
+    // mobile nav toggle
+    $('#nav-toggle').on('click', function (event) {
+      event.preventDefault();
+      $('#main-nav').toggleClass("open");
+    });
+  });
+  // scroll function
+  function scrollToID(id, speed) {
+    var offSet = 0;
+    var targetOffset = $(id).offset().top - offSet;
+    var mainNav = $('#main-nav');
+    $('html,body').animate({ scrollTop: targetOffset }, speed);
+    if (mainNav.hasClass("open")) {
+      mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+      mainNav.removeClass("open");
+    }
+  }
+  if (typeof console === "undefined") {
+    console = {
+      log: function () { }
+    };
+  }
+</script>
+</body>
+
+</html>
