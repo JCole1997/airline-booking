@@ -5,14 +5,10 @@ mongoose = require("mongoose"),
 passport = require("passport"),
 LocalStrategy = require("passport-local"),
 methodOverride = require("method-override"),
-Campground = require("./models/campground"),
-Comment = require("./models/comment"),
 User = require("./models/user"),
 Airline = require("./models/airline"),
 seedDB = require("./seeds");
 
-var campgroundRoute = require("./routes/campgrounds");
-var commentRoute = require("./routes/comments");
 var indexRoute = require("./routes/index");
 var ticketRoute = require("./routes/tickets");
 var adminRoute = require("./routes/admin")
@@ -47,8 +43,6 @@ app.use(function(req, res, next){
 
 //ROUTE
 app.use("/", indexRoute);
-app.use("/campgrounds", campgroundRoute);
-app.use("/campgrounds/:id/comments", commentRoute);
 app.use("/tickets", ticketRoute);
 app.use("/admin", adminRoute);
 
